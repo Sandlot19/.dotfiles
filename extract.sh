@@ -44,4 +44,9 @@ cp -r $repo_path/.vim $HOME/.vim
 # install vim plugins using Plug
 vim +PlugInstall +qall
 
+echo moving dracula theme into place
+mkdir $HOME/.vim/colors
+mv $HOME/.vim/plugged/dracula-theme/vim/colors/dracula.vim $HOME/.vim/colors/
+
+
 #exec zsh
