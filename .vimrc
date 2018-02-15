@@ -1,3 +1,12 @@
+call plug#begin('~/.vim/plugged')
+Plug 'rust-lang/rust.vim'
+Plug 'justinmk/vim-syntax-extra'
+Plug 'Shirk/vim-gas'
+Plug 'flazz/vim-colorschemes'
+Plug 'dracula/vim'
+Plug 'OrangeT/vim-csharp'
+call plug#end()
+
 syntax enable 
 
 set t_kb=
@@ -79,11 +88,3 @@ au BufRead,BufNewFile *.cf set ft=cf3
 autocmd BufNewFile,BufRead /tmp/mutt* set noautoindent filetype=mail wm=0 tw=78 nonumber digraph nolist
 autocmd BufNewFile,BufRead ~/tmp/mutt* set noautoindent filetype=mail wm=0 tw=78 nonumber digraph nolist
 
-call plug#begin('~/.vim/plugged')
-Plug 'rust-lang/rust.vim'
-Plug 'justinmk/vim-syntax-extra'
-Plug 'Shirk/vim-gas'
-Plug 'flazz/vim-colorschemes'
-Plug 'dracula/vim'
-Plug 'OrangeT/vim-csharp'
-call plug#end()
