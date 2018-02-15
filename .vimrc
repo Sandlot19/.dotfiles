@@ -84,5 +84,5 @@ Plug 'rust-lang/rust.vim'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'Shirk/vim-gas'
 Plug 'flazz/vim-colorschemes'
-Plug 'dracula/dracula-theme'
+Plug 'dracula/vim'
 call plug#end()
