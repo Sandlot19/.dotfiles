@@ -18,6 +18,23 @@ case "$user_sh" in
         ;;
 esac
 
+repo_path=$(dirname $(readlink -f $0))
 
+if [ -e $HOME/.zshrc ]
+    mv $HOME/.zshrc $HOME/.old.zshrc
+fi
 
-#exec zsh
+echo copying $repo_path/.zshrc to $HOME/.zshrc
+cp $repo_path/.zshrc $HOME/.zshrc
+
+if [ -e $HOME/.vimrc ]
+    mv $HOME/.vimrc $HOME/.old.vimrc
+fi
+
+echo copying $repo_path/.vimrc to $HOME/.vimrc
+cp $repo_path/.vimrc $HOME/.vimrc
+
+# install vim plugins using Plug
+vim +PlugInstall +qall
+
+exec zsh
