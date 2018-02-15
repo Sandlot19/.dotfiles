@@ -54,4 +54,4 @@ fi
 
 cp $repo_path/dracula.zsh-theme $HOME/.oh-my-zsh/themes/dracula.zsh-theme
 
-#exec zsh
+exec zsh
