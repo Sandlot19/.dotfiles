@@ -46,7 +46,7 @@ vim +PlugInstall +qall
 
 echo moving dracula theme into place
 mkdir $HOME/.vim/colors
-mv $HOME/.vim/plugged/dracula-theme/vim/colors/dracula.vim $HOME/.vim/colors/
+mv $HOME/.vim/plugged/vim/colors/dracula.vim $HOME/.vim/colors/
 
 
 #exec zsh
