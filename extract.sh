@@ -52,6 +52,6 @@ if [ ! -e $HOME/.oh-my-zsh ] ; then
     cp -r $repo_path/oh-my-zsh $HOME/.oh-my-zsh
 fi
 
-mv $repo_path/dracula.zsh-theme $HOME/.oh-my-zsh/themes/dracula.zsh-theme
+cp $repo_path/dracula.zsh-theme $HOME/.oh-my-zsh/themes/dracula.zsh-theme
 
 #exec zsh
