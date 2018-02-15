@@ -48,7 +48,8 @@ echo moving dracula theme into place
 mkdir $HOME/.vim/colors
 mv $HOME/.vim/plugged/vim/colors/dracula.vim $HOME/.vim/colors/
 
-
+#if [ ! -e $HOME/.oh-my-zsh ] ; then
+#    cp 
 
 
 #exec zsh
