@@ -20,14 +20,14 @@ esac
 
 repo_path=$(dirname $(readlink -f $0))
 
-if [ -e $HOME/.zshrc ]
+if [ -e $HOME/.zshrc ] ; then
     mv $HOME/.zshrc $HOME/.old.zshrc
 fi
 
 echo copying $repo_path/.zshrc to $HOME/.zshrc
 cp $repo_path/.zshrc $HOME/.zshrc
 
-if [ -e $HOME/.vimrc ]
+if [ -e $HOME/.vimrc ] ; then
     mv $HOME/.vimrc $HOME/.old.vimrc
 fi
 
