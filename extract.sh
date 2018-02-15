@@ -34,7 +34,14 @@ fi
 echo copying $repo_path/.vimrc to $HOME/.vimrc
 cp $repo_path/.vimrc $HOME/.vimrc
 
+if [ -d $HOME/.vim ] ; then
+    mv $HOME/.vim $HOME/.old.vim
+fi
+
+echo copying $repo_path/.vim to $HOME/.vim
+cp -r $repo_path/.vim $HOME/.vim
+
 # install vim plugins using Plug
 vim +PlugInstall +qall
 
-exec zsh
+#exec zsh
