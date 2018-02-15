@@ -49,4 +49,6 @@ mkdir $HOME/.vim/colors
 mv $HOME/.vim/plugged/vim/colors/dracula.vim $HOME/.vim/colors/
 
 
+
+
 #exec zsh
