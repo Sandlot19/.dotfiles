@@ -85,4 +85,5 @@ Plug 'justinmk/vim-syntax-extra'
 Plug 'Shirk/vim-gas'
 Plug 'flazz/vim-colorschemes'
 Plug 'dracula/vim'
+Plug 'OrangeT/vim-csharp'
 call plug#end()
