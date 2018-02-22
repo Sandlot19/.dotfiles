@@ -5,6 +5,7 @@ Plug 'Shirk/vim-gas'
 Plug 'flazz/vim-colorschemes'
 Plug 'dracula/vim'
 Plug 'OrangeT/vim-csharp'
+Plug 'nanotech/jellybeans.vim'
 call plug#end()
 
 syntax enable 
@@ -75,7 +76,7 @@ set incsearch
 set hlsearch
 
 "I like the desert
-colorscheme dracula
+colorscheme jellybeans
 
 "Always show the tabline
 set showtabline=2
