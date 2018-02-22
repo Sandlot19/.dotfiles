@@ -11,7 +11,7 @@
 
 local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
 
-PROMPT='${ret_status}$fg_bold[red]|$fg_bold[blue]%n@%m$fg_bold[red]|%{$fg_bold[blue]%}%~ $(git_prompt_info)% $fg_bold[yellow]$ '
+PROMPT='${ret_status}$fg_bold[red]|$fg_bold[blue]%n@%m$fg_bold[red]|%{$fg_bold[green]%}%~ $(git_prompt_info)% $fg_bold[yellow]$ '
 RPROMPT=''
 
 ZSH_THEME_GIT_PROMPT_CLEAN=") %{$fg_bold[green]%}✔ "
