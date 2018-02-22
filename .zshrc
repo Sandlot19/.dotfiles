@@ -60,13 +60,14 @@ ZSH_THEME="dracula"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  cargo
-  web-search
-  taskwarrior
 )
 
 source $ZSH/oh-my-zsh.sh
 source .zsh.aliases
+
+if [ -e $HOME/.ssh/agent.sh ] ; then
+    source $HOME/.ssh/agent.sh
+fi
 
 # User configuration
 
