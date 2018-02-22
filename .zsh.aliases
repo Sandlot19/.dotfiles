@@ -1,4 +1,4 @@
 # Aliases to be loaded on shell opening.
-alias bacon="xfreerdp --plugin cliprdr -u jruthe10 bacon.eecs.utk.edu"
-alias rdp="xfreerdp --plugin cliprdr -u jruthe10"
-alias itstaffrdp="xfreerdp -u itstaff --plugin cliprdr"
+alias bacon="xfreerdp +clipboard  /u:jruthe10 /v:bacon.eecs.utk.edu"
+alias rdp="xfreerdp +clipboard /u:jruthe10"
+alias itstaffrdp="xfreerdp /u:itstaff +clipboard"
