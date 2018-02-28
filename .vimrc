@@ -6,6 +6,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'dracula/vim'
 Plug 'OrangeT/vim-csharp'
 Plug 'nanotech/jellybeans.vim'
+Plug 'neilhwatson/vim_cf3'
 call plug#end()
 
 syntax enable 
