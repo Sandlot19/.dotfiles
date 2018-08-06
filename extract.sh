@@ -51,15 +51,9 @@ cp -r $repo_path/.vim $HOME/.vim
 # install vim plugins using Plug
 vim +PlugInstall +qall
 
-echo moving dracula theme into place
-mkdir $HOME/.vim/colors
-mv $HOME/.vim/plugged/vim/colors/dracula.vim $HOME/.vim/colors/
-
 if [ ! -e $HOME/.oh-my-zsh ] ; then
-    git clone https://github.com/robbyrussell/oh-my-zsh.git
-    mv $HOME/oh-my-zsh $HOME/.oh-my-zsh
+    echo "installing oh-my-zsh"
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
-
-cp $repo_path/dracula.zsh-theme $HOME/.oh-my-zsh/themes/dracula.zsh-theme
 
 exec zsh

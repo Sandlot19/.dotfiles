@@ -2,11 +2,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'rust-lang/rust.vim'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'Shirk/vim-gas'
-Plug 'flazz/vim-colorschemes'
-Plug 'dracula/vim'
+Plug 'Sandlot19/vim-colorschemes'
 Plug 'OrangeT/vim-csharp'
-Plug 'nanotech/jellybeans.vim'
 Plug 'neilhwatson/vim_cf3'
+Plug 'Valloric/YouCompleteMe'
 call plug#end()
 
 syntax enable 
@@ -39,8 +38,8 @@ autocmd FileType h set omnifunc=ccomplete#Complete
 set vb
 
 set tabstop=2
-set shiftwidth=4
-set softtabstop=4
+set shiftwidth=2
+set softtabstop=2
 set smarttab
 set expandtab
 
@@ -61,7 +60,7 @@ set smartcase
 "tell you how many lines have been changed
 set report=0
 
-"Keep 5 lines of context at the top and bottom of the screen
+"Keep 10 lines of context at the top and bottom of the screen
 set scrolloff=10
 
 "When pressing tab as part of a shell escape command, complete the
@@ -77,7 +76,7 @@ set incsearch
 set hlsearch
 
 "I like the desert
-colorscheme jellybeans
+colorscheme gentooish
 
 "Always show the tabline
 set showtabline=2
