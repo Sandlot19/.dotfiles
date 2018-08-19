@@ -90,3 +90,7 @@ au BufRead,BufNewFile *.cf set ft=cf3
 autocmd BufNewFile,BufRead /tmp/mutt* set noautoindent filetype=mail wm=0 tw=78 nonumber digraph nolist
 autocmd BufNewFile,BufRead ~/tmp/mutt* set noautoindent filetype=mail wm=0 tw=78 nonumber digraph nolist
 
+hi CursorLine cterm=none term=none ctermbg=8
+hi LineNr ctermfg=darkgrey
+set cursorline
+set nu
