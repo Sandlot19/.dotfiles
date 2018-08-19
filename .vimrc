@@ -5,7 +5,8 @@ Plug 'Shirk/vim-gas'
 Plug 'Sandlot19/vim-colorschemes'
 Plug 'OrangeT/vim-csharp'
 Plug 'neilhwatson/vim_cf3'
-Plug 'Valloric/YouCompleteMe'
+Plug 'tpope/vim-fugitive'
+" Plug 'Valloric/YouCompleteMe'
 call plug#end()
 
 syntax enable 

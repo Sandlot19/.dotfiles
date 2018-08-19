@@ -59,6 +59,5 @@ fi
 omz_custom_themes=${HOME}/.oh-my-zsh/custom/themes
 echo "Cloning Zeta theme to ${omz_custom_themes}"
 git clone https://github.com/Sandlot19/zeta-zsh-theme.git ${omz_custom_themes}
-sed -i '{ s/\(ZSH_THEME=\).*/\1"zeta-zsh-theme/zeta"/ }' ${HOME}/.zshrc
 
 exec zsh
