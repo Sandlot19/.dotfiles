@@ -6,7 +6,6 @@ Plug 'Sandlot19/vim-colorschemes'
 Plug 'OrangeT/vim-csharp'
 Plug 'neilhwatson/vim_cf3'
 Plug 'tpope/vim-fugitive'
-" Plug 'Valloric/YouCompleteMe'
 call plug#end()
 
 syntax enable 
@@ -87,6 +86,11 @@ set showtabline=2
 ":set nolist  " list disables linebreak
 
 au BufRead,BufNewFile *.cf set ft=cf3
-autocmd BufNewFile,BufRead /tmp/mutt* set noautoindent filetype=mail wm=0 tw=78 nonumber digraph nolist
+autocmd BufNewFile,BufRead /tmp/mtt* set noautoindent filetype=mail wm=0 tw=78 nonumber digraph nolist
 autocmd BufNewFile,BufRead ~/tmp/mutt* set noautoindent filetype=mail wm=0 tw=78 nonumber digraph nolist
 
+hi CursorLine   cterm=NONE ctermbg=236 ctermfg=NONE
+hi LineNr ctermfg=darkgrey
+hi CursorLineNr ctermfg=yellow
+set cursorline
+set nu
