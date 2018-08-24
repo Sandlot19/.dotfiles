@@ -65,6 +65,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 source $HOME/.zsh.aliases
 source $HOME/.zsh.path
+source $HOME/.zsh.exports
 
 if [ -e $HOME/.ssh/agent.sh ] ; then
     source $HOME/.ssh/agent.sh
