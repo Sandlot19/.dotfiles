@@ -58,8 +58,10 @@ vim +PlugInstall +qall
 
 upstream=$HOME/upstream
 mkdir -p ${upstream}
+cd ${upstream}
 echo "Cloning Zeta theme to ${upstream}"
-git clone https://github.com/Sandlot19/zeta-zsh-theme.git ${upstream}
+git clone https://github.com/Sandlot19/zeta-zsh-theme.git
 cp ${upstream}/zeta-zsh-theme/zeta.zsh-theme ${HOME}/.oh-my-zsh/custom/themes/
+cd ${HOME}
 
 exec zsh
