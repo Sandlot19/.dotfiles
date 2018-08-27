@@ -18,6 +18,11 @@ case "$user_sh" in
         ;;
 esac
 
+if [ ! -e $HOME/.oh-my-zsh ] ; then
+    echo "installing oh-my-zsh"
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
+
 repo_path=$(dirname $(readlink -f $0))
 
 if [ -e $HOME/.zshrc ] ; then
@@ -51,13 +56,10 @@ cp -r $repo_path/.vim $HOME/.vim
 # install vim plugins using Plug
 vim +PlugInstall +qall
 
-if [ ! -e $HOME/.oh-my-zsh ] ; then
-    echo "installing oh-my-zsh"
-    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-fi
-
-omz_custom_themes=${HOME}/.oh-my-zsh/custom/themes
-echo "Cloning Zeta theme to ${omz_custom_themes}"
-git clone https://github.com/Sandlot19/zeta-zsh-theme.git ${omz_custom_themes}
+upstream=$HOME/upstream
+mkdir -p ${upstream}
+echo "Cloning Zeta theme to ${upstream}"
+git clone https://github.com/Sandlot19/zeta-zsh-theme.git ${upstream}
+cp ${upstream}/zeta-zsh-theme/zeta.zsh-theme ${HOME}/.oh-my-zsh/custom/themes/
 
 exec zsh
