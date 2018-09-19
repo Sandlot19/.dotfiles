@@ -11,14 +11,14 @@ case "$user_sh" in
         # chsh -s zsh and it would find a path ending with zsh,
         # but on Linux you need to give chsh the full path to the shell
         # you want
-        zsh=$(grep zsh /etc/shells | head -n1) 
+        local zsh=$(grep zsh /etc/shells | head -n1)
         echo "Default shell is $user_sh" 
         echo "Setting \$SHELL to $zsh"
         chsh -s $zsh
         ;;
 esac
 
-if [ ! -e $HOME/.oh-my-zsh ] ; then
+if [ ! -d $HOME/.oh-my-zsh ] ; then
     echo "installing oh-my-zsh"
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
@@ -57,11 +57,12 @@ cp -r $repo_path/.vim $HOME/.vim
 vim +PlugInstall +qall
 
 upstream=$HOME/upstream
-mkdir -p ${upstream}
-cd ${upstream}
-echo "Cloning Zeta theme to ${upstream}"
-git clone https://github.com/Sandlot19/zeta-zsh-theme.git
+if [ ! -d ${upstream} ] ; then
+  mkdir -p ${upstream}
+fi
+echo "Cloning Zeta theme to ${upstream}/zeta-zsh-theme"
+mkdir ${upstream}/zeta-zsh-theme
+git clone https://github.com/Sandlot19/zeta-zsh-theme.git ${upstream}/zeta-zsh-theme
 cp ${upstream}/zeta-zsh-theme/zeta.zsh-theme ${HOME}/.oh-my-zsh/custom/themes/
-cd ${HOME}
 
 exec zsh
