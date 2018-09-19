@@ -46,6 +46,13 @@ fi
 echo copying $repo_path/.vimrc to $HOME/.vimrc
 cp $repo_path/.vimrc $HOME/.vimrc
 
+if [ -e $HOME/.tmux.conf ] ; then
+    mv $HOME/.tmux.conf $HOME/.old.tmux.conf
+fi
+
+echo copying $repo_path/.tmux.conf to $HOME/.tmux.conf
+cp $repo_path/.tmux.conf $HOME/.tmux.conf
+
 if [ -d $HOME/.vim ] ; then
     mv $HOME/.vim $HOME/.old.vim
 fi
