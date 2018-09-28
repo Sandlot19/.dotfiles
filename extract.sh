@@ -39,6 +39,13 @@ fi
 echo copying $repo_path/.zsh.aliases to $HOME/.zsh.aliases
 cp $repo_path/.zsh.aliases $HOME/.zsh.aliases
 
+if [ -e $HOME/.zsh.exports ] ; then
+    mv $HOME/.zsh.exports $HOME/.old.zsh.exports
+fi
+
+echo copying $repo_path/.zsh.exports to $HOME/.zsh.exports
+cp $repo_path/.zsh.exports $HOME/.zsh.exports
+
 if [ -e $HOME/.vimrc ] ; then
     mv $HOME/.vimrc $HOME/.old.vimrc
 fi
