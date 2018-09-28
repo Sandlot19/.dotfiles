@@ -8,6 +8,14 @@ Plug 'neilhwatson/vim_cf3'
 Plug 'tpope/vim-fugitive'
 call plug#end()
 
+" Don't redraw the backgound if using a 256-color terminal so vim doesn't
+" mess up in tmux specifically:
+" https://superuser.com/questions/457911/in-vim-background-color-changes-on-scrolling
+" https://sunaku.github.io/vim-256color-bce.html
+if &term =~ '256color'
+  set t_ut=
+endif
+
 syntax enable 
 
 set t_kb=
