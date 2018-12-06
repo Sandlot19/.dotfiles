@@ -6,6 +6,8 @@ Plug 'Sandlot19/vim-colorschemes'
 Plug 'OrangeT/vim-csharp'
 Plug 'neilhwatson/vim_cf3'
 Plug 'tpope/vim-fugitive'
+Plug 'Valloric/YouCompleteMe'
+Plug 'rdnetto/YCM-Generator', {'branch':'stable'}
 call plug#end()
 
 " Don't redraw the backgound if using a 256-color terminal so vim doesn't
@@ -16,6 +18,8 @@ if &term =~ '256color'
   set t_ut=
 endif
 
+let g:ycm_confirm_extra_conf = 0
+
 syntax enable 
 
 set t_kb=
@@ -24,6 +28,8 @@ set modeline
 set backspace=eol,indent,start
 set autoindent
 set smartindent
+
+runtime ftplugin/man.vim
 
 " don't highlight the last search upon startup
 set viminfo="h"
@@ -84,7 +90,7 @@ set incsearch
 set hlsearch
 
 "I like the desert
-colorscheme gentooish
+colorscheme hybrid_material
 
 "Always show the tabline
 set showtabline=2
