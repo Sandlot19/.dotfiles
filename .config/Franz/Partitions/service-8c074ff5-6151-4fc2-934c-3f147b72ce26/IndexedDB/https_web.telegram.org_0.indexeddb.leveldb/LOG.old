@@ -1,0 +1,33 @@
+2018/12/04-14:49:54.750 2735 Reusing MANIFEST /home/jrutherford/.config/Franz/Partitions/service-8c074ff5-6151-4fc2-934c-3f147b72ce26/IndexedDB/https_web.telegram.org_0.indexeddb.leveldb/MANIFEST-000001
+2018/12/04-14:49:54.750 2735 Recovering log #104
+2018/12/04-14:49:55.180 2735 Reusing old log /home/jrutherford/.config/Franz/Partitions/service-8c074ff5-6151-4fc2-934c-3f147b72ce26/IndexedDB/https_web.telegram.org_0.indexeddb.leveldb/000104.log 
+2018/12/04-17:43:28.052 3265 Level-0 table #109: started
+2018/12/04-17:43:28.317 3265 Level-0 table #109: 615116 bytes OK
+2018/12/04-17:43:28.353 3265 Delete type=0 #104
+2018/12/05-00:49:19.599 3265 Level-0 table #111: started
+2018/12/05-00:49:19.688 3265 Level-0 table #111: 615859 bytes OK
+2018/12/05-00:49:19.731 3265 Delete type=0 #108
+2018/12/05-07:55:20.507 3265 Level-0 table #113: started
+2018/12/05-07:55:20.572 3265 Level-0 table #113: 617529 bytes OK
+2018/12/05-07:55:20.607 3265 Delete type=0 #110
+2018/12/05-15:01:11.765 3265 Level-0 table #115: started
+2018/12/05-15:01:11.839 3265 Level-0 table #115: 616004 bytes OK
+2018/12/05-15:01:11.874 3265 Delete type=0 #112
+2018/12/05-15:01:11.875 3265 Compacting 4@0 + 1@1 files
+2018/12/05-15:01:11.964 3265 Generated table #116@0: 383 keys, 18328 bytes
+2018/12/05-15:01:11.964 3265 Compacted 4@0 + 1@1 files => 18328 bytes
+2018/12/05-15:01:11.998 3265 compacted to: files[ 0 1 1 0 0 0 0 ]
+2018/12/05-15:01:11.998 3265 Delete type=2 #106
+2018/12/05-15:01:11.998 3265 Delete type=2 #111
+2018/12/05-15:01:11.999 3265 Delete type=2 #113
+2018/12/05-15:01:11.999 3265 Delete type=2 #109
+2018/12/05-15:01:11.999 3265 Delete type=2 #115
+2018/12/05-22:07:12.749 3265 Level-0 table #118: started
+2018/12/05-22:07:12.835 3265 Level-0 table #118: 615611 bytes OK
+2018/12/05-22:07:12.935 3265 Delete type=0 #114
+2018/12/06-05:13:04.066 3265 Level-0 table #120: started
+2018/12/06-05:13:04.138 3265 Level-0 table #120: 611677 bytes OK
+2018/12/06-05:13:04.173 3265 Delete type=0 #117
+2018/12/06-12:19:05.131 3265 Level-0 table #122: started
+2018/12/06-12:19:05.210 3265 Level-0 table #122: 613004 bytes OK
+2018/12/06-12:19:05.299 3265 Delete type=0 #119

@@ -1,0 +1,24 @@
+2018/12/06-13:22:43.494 26998 Reusing MANIFEST /home/jrutherford/.config/Franz/Partitions/service-8c074ff5-6151-4fc2-934c-3f147b72ce26/IndexedDB/https_web.telegram.org_0.indexeddb.leveldb/MANIFEST-000001
+2018/12/06-13:22:43.494 26998 Recovering log #121
+2018/12/06-13:22:43.500 26998 Reusing old log /home/jrutherford/.config/Franz/Partitions/service-8c074ff5-6151-4fc2-934c-3f147b72ce26/IndexedDB/https_web.telegram.org_0.indexeddb.leveldb/000121.log 
+2018/12/06-19:23:15.056 2977 Level-0 table #125: started
+2018/12/06-19:23:15.135 2977 Level-0 table #125: 620276 bytes OK
+2018/12/06-19:23:15.233 2977 Delete type=0 #121
+2018/12/06-19:23:15.235 2977 Compacting 4@0 + 1@1 files
+2018/12/06-19:23:15.323 2977 Generated table #126@0: 482 keys, 23068 bytes
+2018/12/06-19:23:15.323 2977 Compacted 4@0 + 1@1 files => 23068 bytes
+2018/12/06-19:23:15.365 2977 compacted to: files[ 0 1 1 0 0 0 0 ]
+2018/12/06-19:23:15.365 2977 Delete type=2 #116
+2018/12/06-19:23:15.366 2977 Delete type=2 #120
+2018/12/06-19:23:15.366 2977 Delete type=2 #122
+2018/12/06-19:23:15.366 2977 Delete type=2 #125
+2018/12/06-19:23:15.366 2977 Delete type=2 #118
+2018/12/07-02:29:06.263 2977 Level-0 table #128: started
+2018/12/07-02:29:06.335 2977 Level-0 table #128: 610857 bytes OK
+2018/12/07-02:29:06.378 2977 Delete type=0 #124
+2018/12/07-09:35:07.282 2977 Level-0 table #130: started
+2018/12/07-09:35:07.370 2977 Level-0 table #130: 612478 bytes OK
+2018/12/07-09:35:07.440 2977 Delete type=0 #127
+2018/12/07-16:40:58.396 2977 Level-0 table #132: started
+2018/12/07-16:40:58.462 2977 Level-0 table #132: 610288 bytes OK
+2018/12/07-16:40:58.497 2977 Delete type=0 #129
