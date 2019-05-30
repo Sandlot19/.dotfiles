@@ -6,8 +6,14 @@ Plug 'Sandlot19/vim-colorschemes'
 Plug 'OrangeT/vim-csharp'
 Plug 'neilhwatson/vim_cf3'
 Plug 'tpope/vim-fugitive'
+Plug 'lervag/vimtex'
 Plug 'Valloric/YouCompleteMe'
 Plug 'rdnetto/YCM-Generator', {'branch':'stable'}
+Plug 'junegunn/fzf.vim'
+Plug 'jremmen/vim-ripgrep'
+Plug 'themadsens/tagbar'
+Plug 'vim-syntastic/syntastic'
+Plug 'Nonius/cargo.vim'
 call plug#end()
 
 " Don't redraw the backgound if using a 256-color terminal so vim doesn't
@@ -19,6 +25,24 @@ if &term =~ '256color'
 endif
 
 let g:ycm_confirm_extra_conf = 0
+let g:vimtex_view_general_viewer = 'zathura'
+let g:rust_recommended_style = 0
+
+" Map Ctrl+f to fzf files search
+nnoremap <C-f> :Files<Cr>
+" Map Ctrl+g to ripgrep search
+nnoremap <C-g> :Rg 
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_rust_checkers = ['cargo']
+highlight SyntasticErrorLine guibg=#2f0000
 
 syntax enable 
 
@@ -28,6 +52,8 @@ set modeline
 set backspace=eol,indent,start
 set autoindent
 set smartindent
+set textwidth=80
+set colorcolumn=80
 
 runtime ftplugin/man.vim
 
@@ -108,3 +134,5 @@ hi LineNr ctermfg=darkgrey
 hi CursorLineNr ctermfg=yellow
 set cursorline
 set nu
+
+nmap <F8> :TagbarToggle<CR>
