@@ -11,7 +11,7 @@ case "$user_sh" in
         # chsh -s zsh and it would find a path ending with zsh,
         # but on Linux you need to give chsh the full path to the shell
         # you want
-        local zsh=$(grep zsh /etc/shells | head -n1)
+        zsh=$(grep zsh /etc/shells | head -n1)
         echo "Default shell is $user_sh" 
         echo "Setting \$SHELL to $zsh"
         chsh -s $zsh
