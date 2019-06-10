@@ -9,6 +9,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'lervag/vimtex'
 Plug 'Valloric/YouCompleteMe'
 Plug 'rdnetto/YCM-Generator', {'branch':'stable'}
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'themadsens/tagbar'
@@ -25,6 +26,7 @@ if &term =~ '256color'
 endif
 
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_server_python_interpreter = '/usr/bin/python3'
 let g:vimtex_view_general_viewer = 'zathura'
 let g:rust_recommended_style = 0
 
