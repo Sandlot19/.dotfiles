@@ -25,7 +25,7 @@ fi
 
 repo_path=$(dirname "$(readlink -f "$0")")
 
-for file in .zshrc .zsh.aliaes .zsh.exports .vimrc .tmux.conf ; do
+for file in .zshrc .zsh.aliaes .zsh.exports .zsh.path .vimrc .tmux.conf ; do
     if [ -e "${HOME}/${file}" ] ; then
         mv "${HOME}/${file}" "${HOME}/${file}.old"
     fi
