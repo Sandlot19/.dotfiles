@@ -47,9 +47,7 @@ upstream="${HOME}/upstream"
 if [ ! -d "${upstream}" ] ; then
   mkdir -p "${upstream}"
 fi
-echo "Cloning Zeta theme to ${upstream}/zeta-zsh-theme"
-mkdir ${upstream}/zeta-zsh-theme
-git clone https://github.com/Sandlot19/zeta-zsh-theme.git ${upstream}/zeta-zsh-theme
-cp ${upstream}/zeta-zsh-theme/zeta.zsh-theme ${HOME}/.oh-my-zsh/custom/themes/
+
+cp "${repo_path}/zeta.zsh-theme" "${HOME}/.oh-my-zsh/custom/themes/"
 
 exec zsh
