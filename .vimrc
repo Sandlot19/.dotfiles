@@ -7,14 +7,16 @@ Plug 'OrangeT/vim-csharp'
 Plug 'neilhwatson/vim_cf3'
 Plug 'tpope/vim-fugitive'
 Plug 'lervag/vimtex'
-Plug 'Valloric/YouCompleteMe'
-Plug 'rdnetto/YCM-Generator', {'branch':'stable'}
+Plug 'ycm-core/YouCompleteMe'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'themadsens/tagbar'
+"Plug 'Nonius/cargo.vim'
+Plug 'kergoth/vim-bitbake'
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'vim-syntastic/syntastic'
-Plug 'Nonius/cargo.vim'
 call plug#end()
 
 " Don't redraw the backgound if using a 256-color terminal so vim doesn't
@@ -25,15 +27,18 @@ if &term =~ '256color'
   set t_ut=
 endif
 
+" I like ; better than the default \
+let mapleader = ';'
+
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_server_python_interpreter = '/usr/bin/python3'
+let g:ycm_clangd_args = ['-background-index']
+let g:ycm_clangd_uses_ycmd_caching = 0
+let g:ycm_clangd_binary_path = exepath("clangd")
+let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_server_python_interpreter = '/usr/bin/python'
+"let g:lsp_signs_enabled = 1
 let g:vimtex_view_general_viewer = 'zathura'
 let g:rust_recommended_style = 0
-
-" Map Ctrl+f to fzf files search
-nnoremap <C-f> :Files<Cr>
-" Map Ctrl+g to ripgrep search
-nnoremap <C-g> :Rg 
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -41,10 +46,19 @@ set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-let g:syntastic_rust_checkers = ['cargo']
-highlight SyntasticErrorLine guibg=#2f0000
+let g:syntastic_sh_shellcheck_args = '-x'
+
+
+" Personal shortcuts
+nnoremap <Leader>o :call fzf#run({'sink': 'badd'})<Cr>
+nnoremap <Leader>b :Buffers<Cr>
+nnoremap <Leader>G :Rg 
+nnoremap <Leader>g :Rg <C-r><C-w>
+nnoremap <Leader>f :YcmCompleter GoToImprecise<Cr>
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+inoremap jk <Esc>
 
 syntax enable 
 
@@ -79,9 +93,9 @@ autocmd FileType h set omnifunc=ccomplete#Complete
 " stop Vim from beeping all the time
 set vb
 
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+"set tabstop=8
+set shiftwidth=4
+"set softtabstop=4
 set smarttab
 set expandtab
 
@@ -117,7 +131,7 @@ set incsearch
 "Highlight all matches of the current search on the current screen
 set hlsearch
 
-"I like the desert
+"I like the colors
 colorscheme hybrid_material
 
 "Always show the tabline
@@ -127,7 +141,6 @@ set showtabline=2
 ":set linebreak
 ":set nolist  " list disables linebreak
 
-au BufRead,BufNewFile *.cf set ft=cf3
 autocmd BufNewFile,BufRead /tmp/mtt* set noautoindent filetype=mail wm=0 tw=78 nonumber digraph nolist
 autocmd BufNewFile,BufRead ~/tmp/mutt* set noautoindent filetype=mail wm=0 tw=78 nonumber digraph nolist
 
@@ -137,4 +150,17 @@ hi CursorLineNr ctermfg=yellow
 set cursorline
 set nu
 
-nmap <F8> :TagbarToggle<CR>
+if executable('clangd')
+    augroup lsp_clangd
+        autocmd!
+        autocmd User lsp_setup call lsp#register_server({
+                    \ 'name': 'clangd',
+                    \ 'cmd': {server_info->['clangd']},
+                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+                    \ })
+        autocmd FileType c setlocal omnifunc=lsp#complete
+        autocmd FileType cpp setlocal omnifunc=lsp#complete
+        autocmd FileType objc setlocal omnifunc=lsp#complete
+        autocmd FileType objcpp setlocal omnifunc=lsp#complete
+    augroup end
+endif
