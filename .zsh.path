@@ -4,4 +4,8 @@ if [ -d ${HOME}/.cargo/bin ] ; then
   PATH="${PATH}:${HOME}/.cargo/bin"
 fi
 
+if [[ ! "flatpak" =~ "${PATH}" ]] && [[ -d "/var/lib/flatpak/exports/bin" ]] ; then
+    PATH="${PATH}:/var/lib/flatpak/exports/bin"
+fi
+
 export PATH
