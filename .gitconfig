@@ -1,0 +1,10 @@
+[core]
+        editor = nvim
+        excludesFile = ~/.gitignore
+[pull]
+        rebase = true
+[user]
+	name = Jacob Rutherford
+	email = jacob_rutherford@apple.com
+[pager]
+	branch = false

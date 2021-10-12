@@ -1,6 +1,12 @@
 #!/bin/sh
 
-user_sh=$(getent passwd "${USER}" | sed 's/.*://')
+if command -v getent ; then
+    user_sh=$(getent passwd "${USER}" | sed 's/.*://')
+else
+    # pray that the default setup sets $SHELL
+    user_sh="$(echo ${SHELL})"
+fi
+
 case "${user_sh}" in
     *"zsh")
         echo "Default shell is ${user_sh}"
@@ -23,9 +29,9 @@ if [ ! -d "${HOME}/.oh-my-zsh" ] ; then
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
 
-repo_path=$(dirname "$(readlink -f "$0")")
+repo_path=$(dirname "$0")
 
-for file in .zshrc .zsh.aliaes .zsh.exports .zsh.path .vimrc .tmux.conf ; do
+for file in .zshrc .zsh.exports .zsh.path .vimrc .tmux.conf .gitconfig .gitignore; do
     if [ -e "${HOME}/${file}" ] ; then
         mv "${HOME}/${file}" "${HOME}/${file}.old"
     fi
@@ -40,8 +46,22 @@ fi
 echo "copying ${repo_path}/.vim to ${HOME}/.vim"
 cp -r "${repo_path}/.vim" "${HOME}/.vim"
 
+echo "setting up neovim"
+mkdir -p "${HOME}/.config/nvim"
+cp "${repo_path}/init.vim ${HOME}/.config/nvim/"
+
+if ! command -v nvim ; then
+    # figure out how to install neovim -- will need to continuously update this
+    # based on how to fetch the package.
+
+    # Method #1: brew
+    if command -v brew ; then
+        brew install nvim
+    fi
+fi
+
 # install vim plugins using Plug
-vim +PlugInstall +qall
+nvim +PlugInstall +qall
 
 upstream="${HOME}/upstream"
 if [ ! -d "${upstream}" ] ; then
