@@ -2,6 +2,3 @@
 alias ls="ls --color --classify"
 
 alias gist="git log --pretty=oneline --graph --color --decorate --all --abbrev-commit"
-alias cat="bat -p"
-
-alias xclip="xclip -selection c"

@@ -48,7 +48,9 @@ cp -r "${repo_path}/.vim" "${HOME}/.vim"
 
 echo "setting up neovim"
 mkdir -p "${HOME}/.config/nvim"
-cp "${repo_path}/init.vim ${HOME}/.config/nvim/"
+cp "${repo_path}/init.vim" "${HOME}/.config/nvim/"
+cp -r "${repo_path}/lua" "${HOME}/.config/nvim"
+echo "done"
 
 if ! command -v nvim ; then
     # figure out how to install neovim -- will need to continuously update this

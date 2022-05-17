@@ -66,6 +66,8 @@ plugins=(
 source $HOME/.zsh.aliases
 source $HOME/.zsh.path
 source $HOME/.zsh.exports
+# To be provided locally and not copied to dotfiles
+source $HOME/.zsh.private
 source $ZSH/oh-my-zsh.sh
 
 if [ -e $HOME/.ssh/agent.sh ] ; then
@@ -103,9 +105,9 @@ fi
 unsetopt HIST_VERIFY
 
 # fzf autocompletion
-[[ $- == *i* ]] && source "/home/rutherfordjac/.fzf/shell/completion.zsh" 2> /dev/null
+[[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
 
 # fzf key bindings
-source "/home/rutherfordjac/.fzf/shell/key-bindings.zsh"
+source "$HOME/.fzf/shell/key-bindings.zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
