@@ -1,6 +1,4 @@
 call plug#begin('~/.vim/plugged')
-Plug 'rust-lang/rust.vim'
-Plug 'justinmk/vim-syntax-extra'
 Plug 'Shirk/vim-gas'
 Plug 'Sandlot19/vim-colorschemes'
 Plug 'tpope/vim-fugitive'
@@ -8,10 +6,20 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'folke/trouble.nvim', { 'branch': 'main' }
 Plug 'vimwiki/vimwiki'
+
+" nvim-cmp setup
+Plug 'hrsh7th/cmp-nvim-lsp', { 'branch': 'main' }
+Plug 'hrsh7th/cmp-buffer', { 'branch': 'main' }
+Plug 'hrsh7th/cmp-path', { 'branch': 'main' }
+Plug 'hrsh7th/cmp-cmdline', { 'branch': 'main' }
+Plug 'hrsh7th/nvim-cmp', { 'branch': 'main' }
+
+" For vsnip users.
+Plug 'hrsh7th/cmp-vsnip', { 'branch': 'main' }
+Plug 'hrsh7th/vim-vsnip', { 'branch': 'main' }
+
 call plug#end()
 
 " Don't redraw the backgound if using a 256-color terminal so vim doesn't
@@ -44,7 +52,6 @@ nnoremap <Leader>g :Rg <C-r><C-w>
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 nnoremap <Leader>h :match SpellRare /<C-r><C-w>\c/<Cr>
 nnoremap <Leader>n :match none<Cr>
-nnoremap <Leader>xx <cmd>TroubleToggle<Cr>
 inoremap jk <Esc>
 
 syntax enable 
