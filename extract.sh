@@ -31,7 +31,7 @@ fi
 
 repo_path=$(dirname "$0")
 
-for file in .zshrc .zsh.exports .zsh.path .vimrc .tmux.conf .gitconfig .gitignore; do
+for file in .zshrc .zsh.exports .zsh.path .tmux.conf .gitconfig .gitignore; do
     if [ -e "${HOME}/${file}" ] ; then
         mv "${HOME}/${file}" "${HOME}/${file}.old"
     fi
@@ -43,12 +43,9 @@ if [ -d "${HOME}/.vim" ] ; then
     mv "${HOME}/.vim" "${HOME}/.vim.old"
 fi
 
-echo "copying ${repo_path}/.vim to ${HOME}/.vim"
-cp -r "${repo_path}/.vim" "${HOME}/.vim"
-
 echo "setting up neovim"
 mkdir -p "${HOME}/.config/nvim"
-cp "${repo_path}/init.vim" "${HOME}/.config/nvim/"
+cp "${repo_path}/init.lua" "${HOME}/.config/nvim/"
 cp -r "${repo_path}/lua" "${HOME}/.config/nvim"
 echo "done"
 
@@ -62,8 +59,8 @@ if ! command -v nvim ; then
     fi
 fi
 
-# install vim plugins using Plug
-nvim +PlugInstall +qall
+# install vim plugins using Lazy
+nvim +Lazy
 
 upstream="${HOME}/upstream"
 if [ ! -d "${upstream}" ] ; then
