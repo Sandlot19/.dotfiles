@@ -63,16 +63,11 @@ plugins=(
   pass
 )
 
-source $HOME/.zsh.aliases
-source $HOME/.zsh.path
-source $HOME/.zsh.exports
-# To be provided locally and not copied to dotfiles
-source $HOME/.zsh.private
-source $ZSH/oh-my-zsh.sh
+# Things to be sourced.
+source $HOME/.zsh.sources
 
-if [ -e $HOME/.ssh/agent.sh ] ; then
-    source $HOME/.ssh/agent.sh
-fi
+# Keep this here because it's part of the omz default configuration.
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -103,11 +98,3 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 unsetopt HIST_VERIFY
-
-# fzf autocompletion
-[[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
-
-# fzf key bindings
-source "$HOME/.fzf/shell/key-bindings.zsh"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

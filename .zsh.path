@@ -8,5 +8,6 @@ fi
 
 # I know what I'm doing...probably
 PATH="${HOME}/bin:${PATH}"
+PATH="${HOME}/.local/bin:${PATH}"
 
 export PATH

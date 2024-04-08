@@ -1,14 +1,8 @@
-export TERMINAL=iTerm.app
-export TERM=xterm-256color
-#export EDITOR=vim
 export EDITOR=nvim
-export LIBVIRT_DEFAULT_URI=qemu:///system
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
 # disable some annoying oh-my-zsh "features"
 export DISABLE_MAGIC_FUNCTIONS=true
 export DISABLE_LS_COLORS=true
-
-alias ls="ls -FG"
 
 unset PAGER

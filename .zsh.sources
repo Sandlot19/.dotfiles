@@ -1,0 +1,8 @@
+source /usr/share/doc/fzf/examples/completion.zsh
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source .zsh.aliases
+source .zsh.exports
+source .zsh.path
+
+# To be provided locally and not copied to dotfiles
+source $HOME/.zsh.private
