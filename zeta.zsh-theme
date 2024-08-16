@@ -7,7 +7,8 @@ local black=$fg[black]
 local red=$fg[red]
 local blue=$fg[blue]
 local green=$fg[green]
-local yellow=$fg[yellow] local magenta=$fg[magenta]
+local yellow=$fg[yellow]
+local magenta=$fg[magenta]
 local cyan=$fg[cyan]
 local white=$fg[white]
 
@@ -23,6 +24,44 @@ local white_bold=$fg_bold[white]
 local highlight_bg=$bg[red]
 
 local zeta="=> "
+
+########################### BEGIN RIP FROM OMZ TIMER PLUGIN ########################################
+# The below is taken from the 'timer' plugin fro omz, modified slightly to set a variable that is
+# placeable in my prompt rather than setting an unconfigurable print location.
+local __tdiffstr=""
+
+zmodload zsh/datetime
+
+__timer_current_time() {
+  zmodload zsh/datetime
+  echo $EPOCHREALTIME
+}
+
+__timer_format_duration() {
+  local mins=$(printf '%.0f' $(($1 / 60)))
+  local secs=$(printf "%.${TIMER_PRECISION:-1}f" $(($1 - 60 * mins)))
+  local duration_str=$(echo "${mins}m${secs}s")
+  local format="${TIMER_FORMAT:-/%d}"
+  echo "${format//\%d/${duration_str#0m}}"
+}
+
+__timer_save_time_preexec() {
+  __timer_cmd_start_time=$(__timer_current_time)
+}
+
+__timer_display_timer_precmd() {
+  if [ -n "${__timer_cmd_start_time}" ]; then
+    local cmd_end_time=$(__timer_current_time)
+    local tdiff=$((cmd_end_time - __timer_cmd_start_time))
+    unset __timer_cmd_start_time
+    if [[ -z "${TIMER_THRESHOLD}" || ${tdiff} -ge "${TIMER_THRESHOLD}" ]]; then
+        __tdiffstr=$(__timer_format_duration ${tdiff})
+        local cols=$((COLUMNS - ${#tdiffstr} - 1))
+        echo -e "\033[1A\033[${cols}C ${tdiffstr}"
+    fi
+  fi
+}
+########################### END RIP FROM OMZ TIMER PLUGIN ##########################################
 
 # Machine name.
 function get_box_name {
@@ -48,7 +87,7 @@ function get_current_dir {
 }
 
 # Git info.
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$blue_bold%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$yellow_bold%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$green_bold%} ✔ "
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$red_bold%} ✘ "
@@ -67,17 +106,21 @@ ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$reset_color%}]"
 
 function get_git_prompt {
     if [[ -n $(git rev-parse --is-inside-work-tree 2>/dev/null) ]]; then
-        #local git_status="$(git_prompt_status)"
-        #if [[ -n $git_status ]]; then
-        #    git_status="[$git_status%{$reset_color%}]"
-        #fi
-        local git_prompt=" <$(git_prompt_info)$git_status>"
-        echo $git_prompt
-    fi
-}
+    #    local git_status="$(git_prompt_status)"
+    #    if [[ -n $git_status ]] ; then
+    #        git_status="[$git_status%{$reset_color%}]"
+    #    fi
+    #    local git_prompt=" <$(git_prompt_info)$git_status>"
+    #    echo $git_prompt
+      local git_branch="$(git_current_branch)"
 
-function get_time_stamp {
-    echo "%*"
+      if git diff --quiet ; then
+        echo " <%{$green_bold%}$git_branch%{$reset_color%}>"
+      else
+        echo " <%{$red_bold%}$git_branch%{$reset_color%}>"
+      fi
+
+    fi
 }
 
 function get_space {
@@ -101,9 +144,11 @@ function print_prompt_head {
 %{$green_bold%}$(get_usr_name)%{$reset_color%}\
 %{$blue_bold%}] \
 %{$white%}%4~%{$reset_color%} \
-$(get_git_prompt)"
-    local right_prompt="%{$blue%}($(get_time_stamp))%{$reset_color%} "
-    print -rP "$left_prompt$(get_space $left_prompt $right_prompt)$right_prompt"
+$(get_git_prompt) ${__tdiffstr}"
+    #local right_prompt="%{$blue%})%{$reset_color%} "
+    #print -rP "$left_prompt$(get_space $left_prompt $right_prompt)$right_prompt"
+    print -rP "$left_prompt$(get_space $left_prompt)"
+    unset __tdiffstr
 }
 
 function get_prompt_indicator {
@@ -115,8 +160,9 @@ function get_prompt_indicator {
 }
 
 autoload -U add-zsh-hook
+add-zsh-hook preexec __timer_save_time_preexec
+add-zsh-hook precmd __timer_display_timer_precmd
 add-zsh-hook precmd print_prompt_head
 setopt prompt_subst
 
 PROMPT='$(get_prompt_indicator)'
-RPROMPT='$(git_prompt_short_sha) '
