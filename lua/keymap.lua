@@ -43,27 +43,50 @@ opts = { noremap = true, silent = true }
 keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+keymap.set('n', '<leader>q', vim.diagnostic.setqflist, opts)
 -- End Diagnostics
 
 -- OSC52 - neovim native
 local osc52 = require('vim.ui.clipboard.osc52')
 opts = { noremap = true }
 keymap.set('v', '<leader>c', function()
-  -- Modified to return the raw table from
-  -- https://neovim.discourse.group/t/function-that-return-visually-selected-text/1601.
-  -- The function returned by osc52.copy expects a table of lines, which will be joined internally.
-  local function get_visual_selection()
-    local s_start = vim.fn.getpos("'<")
-    local s_end = vim.fn.getpos("'>")
-    local n_lines = math.abs(s_end[2] - s_start[2]) + 1
-    local lines = vim.api.nvim_buf_get_lines(0, s_start[2] - 1, s_end[2], false)
-    lines[1] = string.sub(lines[1], s_start[3], -1)
-    if n_lines == 1 then
-      lines[n_lines] = string.sub(lines[n_lines], 1, s_end[3] - s_start[3] + 1)
+  function table_length(T)
+    local count = 0
+    for _ in pairs(T) do count = count + 1 end
+    return count
+  end
+
+  function get_visual_selection()
+    -- this will exit visual mode
+    -- use 'gv' to reselect the text
+    local _, csrow, cscol, cerow, cecol
+    local mode = vim.fn.mode()
+    if mode == 'v' or mode == 'V' or mode == '' then
+      -- if we are in visual mode use the live position
+      _, csrow, cscol, _ = unpack(vim.fn.getpos("."))
+      _, cerow, cecol, _ = unpack(vim.fn.getpos("v"))
+      if mode == 'V' then
+        -- visual line doesn't provide columns
+        cscol, cecol = 0, 999
+      end
+      -- exit visual mode
+      vim.api.nvim_feedkeys(
+        vim.api.nvim_replace_termcodes("<Esc>",
+          true, false, true), 'n', true)
     else
-      lines[n_lines] = string.sub(lines[n_lines], 1, s_end[3])
+      -- otherwise, use the last known visual position
+      _, csrow, cscol, _ = unpack(vim.fn.getpos("'<"))
+      _, cerow, cecol, _ = unpack(vim.fn.getpos("'>"))
     end
+    -- swap vars if needed
+    if cerow < csrow then csrow, cerow = cerow, csrow end
+    if cecol < cscol then cscol, cecol = cecol, cscol end
+    local lines = vim.fn.getline(csrow, cerow)
+    -- local n = cerow-csrow+1
+    local n = table_length(lines)
+    if n <= 0 then return '' end
+    lines[n] = string.sub(lines[n], 1, cecol)
+    lines[1] = string.sub(lines[1], cscol)
     return lines
   end
 
@@ -72,10 +95,34 @@ end, opts)
 -- End OSC52
 
 -- Harpoon
-local harpoon_mark = require('harpoon.mark')
-local harpoon_ui = require('harpoon.ui')
-keymap.set('n', '<leader>m', function() harpoon_mark.add_file() end, opts)
-keymap.set('n', '<leader>l', function() harpoon_ui.toggle_quick_menu() end, opts)
+local harpoon = require('harpoon')
+harpoon:setup()
+local harpoon_mark = harpoon.mark
+local harpoon_ui = harpoon.ui
+keymap.set('n', '<leader>m', function() harpoon:list():add() end, opts)
+keymap.set('n', '<leader>l', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, opts)
+
+local conf = require("telescope.config").values
+local function toggle_telescope(harpoon_files)
+    local file_paths = {}
+    for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+    end
+
+    require("telescope.pickers").new({}, {
+        prompt_title = "Harpoon",
+        finder = require("telescope.finders").new_table({
+            results = file_paths,
+        }),
+        previewer = conf.file_previewer({}),
+        sorter = conf.generic_sorter({}),
+    }):find()
+end
+
+vim.keymap.set("n", "<leader>a", function() toggle_telescope(harpoon:list()) end,
+    { desc = "Open harpoon window" })
+
+
 keymap.set('n', '<leader>a', '<cmd>Telescope harpoon marks<CR>', opts)
 
 opts.callback = nil
@@ -90,6 +137,13 @@ keymap.set('n', '<leader>8', function() harpoon_ui.nav_file(8) end)
 keymap.set('n', '<leader>9', function() harpoon_ui.nav_file(9) end)
 -- End Harpoon
 
+-- Neorg
+-- Some of neorgs default keybindings refuse to bind the key if even a _prefix_ of the mapping is
+-- already mapped, so we have to forcefully map them here. These are all defaults.
+local neorg = require('neorg')
+keymap.set('n', '<leader>nn', function() neorg.modules.get_module('core.dirman').new_note() end)
+-- End Neorg
+
 -- This one explicitly is not ending with CR so I can type the replacement
 -- string. The [[ ]] is lua literal string syntax so we don't need so many
 -- escapes. This needed to be changed from using <cmd> to using ":" since <cmd>
@@ -98,9 +152,11 @@ keymap.set('n', '<leader>9', function() harpoon_ui.nav_file(9) end)
 keymap.set('n', '<leader>s', [[:%s/<C-r><C-w>/]])
 keymap.set('n', '<leader>n', '<cmd>noh<CR>')
 
-function OnLspAttach(ev)
+local M = {}
+
+function M.SetLspKeymaps(_client, bufnr)
   local builtin = require('telescope.builtin')
-  local opts = { buffer = ev.buf }
+  local opts = { buffer = bufnr }
 
   keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
   keymap.set('n', 'gd', builtin.lsp_definitions, opts)
@@ -117,3 +173,5 @@ function OnLspAttach(ev)
     vim.lsp.buf.format({ async = true })
   end, opts)
 end
+
+return M

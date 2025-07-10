@@ -7,7 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="zeta"
+ZSH_THEME="agkozak"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -15,6 +15,11 @@ ZSH_THEME="zeta"
 # looking in ~/.oh-my-zsh/themes/
 # An empty array have no effect
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -59,8 +64,10 @@ ZSH_THEME="zeta"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
+  # git
+  vi-mode
   pass
+  direnv
 )
 
 # Things to be sourced.
@@ -98,3 +105,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 unsetopt HIST_VERIFY
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/usr/local/google/home/jruthe/gcloud-cli/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/google/home/jruthe/gcloud-cli/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/usr/local/google/home/jruthe/gcloud-cli/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/google/home/jruthe/gcloud-cli/google-cloud-sdk/completion.zsh.inc'; fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

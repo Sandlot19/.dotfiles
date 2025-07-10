@@ -31,7 +31,7 @@ fi
 
 repo_path=$(dirname "$0")
 
-for file in .zshrc .zsh.exports .zsh.path .tmux.conf .gitconfig .gitignore; do
+for file in .zshrc .zsh.exports .zsh.path .gitconfig .gitignore; do
     if [ -e "${HOME}/${file}" ] ; then
         mv "${HOME}/${file}" "${HOME}/${file}.old"
     fi
@@ -42,6 +42,11 @@ done
 if [ -d "${HOME}/.vim" ] ; then
     mv "${HOME}/.vim" "${HOME}/.vim.old"
 fi
+
+echo "installing zellij configuration"
+mkdir -p "${HOME}/.config/zellij"
+cp "${repo_path}/config.kdl" "${HOME}"/.config/zellij
+echo "done"
 
 echo "setting up neovim"
 mkdir -p "${HOME}/.config/nvim"

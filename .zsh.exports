@@ -3,6 +3,9 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
 # disable some annoying oh-my-zsh "features"
 export DISABLE_MAGIC_FUNCTIONS=true
-export DISABLE_LS_COLORS=true
+
+export AGKOZAK_LEFT_PROMPT_ONLY=1
+export AGKOZAK_CUSTOM_SYMBOLS=( '⇣⇡' '⇣' '⇡' '+' 'x' '!' '>' '?' 'S')
+export AGKOZAK_PROMPT_CHAR=( $ %# : )
 
 unset PAGER
