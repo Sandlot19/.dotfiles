@@ -72,6 +72,7 @@ if [ ! -d "${upstream}" ] ; then
   mkdir -p "${upstream}"
 fi
 
-cp "${repo_path}/zeta.zsh-theme" "${HOME}/.oh-my-zsh/custom/themes/"
+git clone https://github.com/agkozak/agkozak-zsh-prompt.git "${upstream}/agkozak-zsh-prompt"
+ln -s "${upstream}/agkozak-zsh-prompt/agkozak-zsh-prompt.plugin.zsh" "${HOME}/.oh-my-zsh/custom/agkozak.zsh-theme"
 
 exec zsh
