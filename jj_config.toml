@@ -1,0 +1,10 @@
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+[aliases]
+stat = ["show", "--stat"]
+
+[ui]
+pager = ":builtin"
+
+[ui.streampager]
+interface = "quit-quickly-or-clear-output"

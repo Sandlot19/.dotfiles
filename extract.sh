@@ -48,6 +48,11 @@ mkdir -p "${HOME}/.config/zellij"
 cp "${repo_path}/config.kdl" "${HOME}"/.config/zellij
 echo "done"
 
+echo "installing jj configuration"
+mkdir -p "${HOME}/.config/jj"
+cp "${repo_path}/jj_config.toml" "${HOME}"/.config/jj/config.toml
+echo "done"
+
 echo "setting up neovim"
 mkdir -p "${HOME}/.config/nvim"
 cp "${repo_path}/init.lua" "${HOME}/.config/nvim/"
