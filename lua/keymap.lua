@@ -15,7 +15,8 @@ opts = { noremap = true }
 keymap.set('n', '<leader>o', builtin.find_files, opts)
 keymap.set('n', '<leader>g', builtin.grep_string, opts)
 keymap.set('n', '<leader>G', builtin.live_grep, opts)
-keymap.set('n', '<leader>b', builtin.buffers, opts)
+keymap.set('n', '<leader>b', function() builtin.buffers({layout = {}}) end, opts)
+keymap.set('n', '<leader>q', builtin.quickfix, opts)
 -- End Telescope
 
 -- Fugitive
@@ -136,13 +137,6 @@ keymap.set('n', '<leader>7', function() harpoon_ui.nav_file(7) end)
 keymap.set('n', '<leader>8', function() harpoon_ui.nav_file(8) end)
 keymap.set('n', '<leader>9', function() harpoon_ui.nav_file(9) end)
 -- End Harpoon
-
--- Neorg
--- Some of neorgs default keybindings refuse to bind the key if even a _prefix_ of the mapping is
--- already mapped, so we have to forcefully map them here. These are all defaults.
-local neorg = require('neorg')
-keymap.set('n', '<leader>nn', function() neorg.modules.get_module('core.dirman').new_note() end)
--- End Neorg
 
 -- This one explicitly is not ending with CR so I can type the replacement
 -- string. The [[ ]] is lua literal string syntax so we don't need so many

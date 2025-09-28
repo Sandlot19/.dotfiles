@@ -74,14 +74,17 @@ vim.lsp.config("rust-analyzer", {
   filetypes = { 'rust' },
   settings = {
     ['rust-analyzer'] = {
-      checkOnSave = false,
+      -- checkOnSave = false,
       -- checkOnSave = is_fuchsia and fx_clippy or { command = "clippy" }, -- false, --
-      cachePriming = { enable = false },
-      diagnostics = {
-        disabled = { "unresolved-proc-macro" },
-        refreshSupport = false,
-      },
-      completion = { callable = { snippets = "none" }, postfix = { enable = false } },
+      -- cachePriming = { enable = false },
+      -- diagnostics = {
+      --   disabled = { "unresolved-proc-macro" },
+      --   refreshSupport = false,
+      -- },
+      -- procMacro = {
+      --   enable = true,
+      -- },
+      -- completion = { callable = { snippets = "none" }, postfix = { enable = false } },
     },
   }
 })
