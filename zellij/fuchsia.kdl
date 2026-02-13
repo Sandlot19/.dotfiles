@@ -1,0 +1,112 @@
+layout {
+  cwd "upstream/fuchsia"
+
+  default_tab_template {
+    pane size=1 borderless=true {
+      plugin location="zellij:tab-bar"
+    }
+
+    children
+
+    pane size=2 borderless=true {
+      plugin location="zellij:status-bar"
+    }
+  }
+
+  // Logical container of the entire window.
+  // This will create pane layout that will look like
+  //       |>
+  //       |-------
+  // >     |> |jjui
+  //
+  // All panes will be rooted at $FUCHSIA_DIR
+  tab name="main" {
+    pane split_direction="vertical" {
+      // This is the pane that will take up the entire left half
+      pane
+      // Logical container for the right half.
+      pane split_direction="horizontal" {
+        // Split twice.
+        pane
+
+        // The jjui pane doesn't need to be super wide, so we can have another scratch terminal in
+        // between the primary "full" vertical tab.
+        pane split_direction="vertical" {
+          pane
+          pane command="jjui"
+        }
+      }
+    }
+  }
+
+  // Tab #2: zxdb editor
+  nvim name="debugger-edit" cwd="src/developer/debug"
+
+  // Tab #3: gemini-cli
+  tab name="gemini-cli" {
+    pane command="emini-cli"
+  }
+
+  // Tab #4: unwinder editor
+  nvim name="unwinder-edit" cwd="src/lib/unwinder"
+
+  // Tab #5,6,7,8: scratch
+  tab
+  tab
+  tab
+  tab name="testing" cwd="../../testing"
+
+
+  // Tab #9:
+  // Logical container of the entire window.
+  // This will create pane layout that will look like
+  // >  |>
+  // -------
+  // >  |>
+  //
+  // All panes will be rooted at $FUCHSIA_DIR
+  tab name="debugger-tests" {
+    pane split_direction="vertical" {
+      fx {
+        name "zxdb-e2e-tests"
+        args "test" "--e2e" "-o" "zxdb_e2e_tests"
+      }
+      fx {
+        name "unwinder-tests"
+        args "test" "-o" "unwinder-tests"
+      }
+    }
+    pane split_direction="vertical" {
+      fx {
+        name "zxdb-tests" 
+        args "test" "--host" "-o" "zxdb_tests"
+      }
+      fx {
+        name "debug-agent-tests" 
+        args "test" "--device" "-o" "debug_agent_unittests"
+      }
+    }
+  }
+
+  pane_template {
+    name "fx"
+    command "fx" 
+    start_suspended true
+  }
+
+  // This template opens "." in nvim, so set cwd when using this.
+  tab_template name="nvim" {
+    pane size=1 borderless=true {
+      plugin location="zellij:tab-bar"
+    }
+
+    pane {
+      command "nvim"
+      args "."
+    }
+
+    pane size=2 borderless=true {
+      plugin location="zellij:status-bar"
+    }
+  }
+}

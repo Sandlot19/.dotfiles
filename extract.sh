@@ -24,8 +24,11 @@ if [ -d ${repo_path}/legacy_zsh ] ; then
 fi
 
 echo "installing zellij configuration"
-mkdir -p "${HOME}/.config/zellij"
-cp "${repo_path}/config.kdl" "${HOME}"/.config/zellij
+ZELLIJ_DIR="${HOME}/.config/zellij"
+mkdir -p ${ZELLIJ_DIR}
+for f in ${repo_path}/zellij/** ; do
+  cp -v "${repo_path}/$f" "${ZELLIJ_DIR}/$f"
+done
 echo "done"
 
 echo "installing jj configuration"
