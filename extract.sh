@@ -12,6 +12,7 @@ for f in ${repo_path}/fish/** ; do
   mkdir -p $(dirname $f)
   cp -v "$f" "${FISH_DIR}/$f"
 done
+unset FISH_DIR
 
 echo "Installing bash hack for fish bootstrapping"
 cat ${repo_path}/bashrc-hack >> ../.bashrc
@@ -20,10 +21,6 @@ echo "You might want to install fzf.fish or fuchsia.git//scripts/fx-env.fish now
 
 if [ -d ${repo_path}/legacy_zsh ] ; then
   echo "Note: legacy zsh dotfiles are in ${PWD}/legacy_zsh"
-fi
-
-if [ -d "${HOME}/.vim" ] ; then
-    mv "${HOME}/.vim" "${HOME}/.vim.old"
 fi
 
 echo "installing zellij configuration"
@@ -36,24 +33,25 @@ mkdir -p "${HOME}/.config/jj"
 cp "${repo_path}/jj_config.toml" "${HOME}"/.config/jj/config.toml
 echo "done"
 
+echo "You might want to install jj using mise."
+
 echo "setting up neovim"
-mkdir -p "${HOME}/.config/nvim"
-cp "${repo_path}/init.lua" "${HOME}/.config/nvim/"
-cp -r "${repo_path}/lua" "${HOME}/.config/nvim"
+NVIM_DIR="${HOME}/.config/nvim"
+mkdir -p ${NVIM_DIR}
+for f in ${repo_path}/nvim/** ; do
+  cp -v "${repo_path}/$f" "${NVIM_DIR}/$f"
+done
 echo "done"
+unset NVIM_DIR
 
 if ! command -v nvim ; then
-    # figure out how to install neovim -- will need to continuously update this
-    # based on how to fetch the package.
-
-    # Method #1: brew
-    if command -v brew ; then
-        brew install nvim
-    fi
+  echo "WARNING: Neovim is not yet installed to PATH"
+else
+  echo "Installing plugins using Lazy"
+  sleep 3
+  # install vim plugins using Lazy
+  nvim +Lazy
 fi
-
-# install vim plugins using Lazy
-nvim +Lazy
 
 upstream="${HOME}/upstream"
 if [ ! -d "${upstream}" ] ; then

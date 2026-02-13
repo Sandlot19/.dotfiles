@@ -3,7 +3,6 @@ return {
   lazy = false, -- lazy loading handled internally
   -- optional: provides snippets for the snippet source
   dependencies = {
-    'Kaiser-Yang/blink-cmp-avante',
     'nvim-tree/nvim-web-devicons',
     'rafamadriz/friendly-snippets',
   },
@@ -24,23 +23,27 @@ return {
 
     -- for keymap, all values may be string | string[]
     -- use an empty table to disable a keymap
-    keymap = { preset = 'enter' },
+    keymap = {
+      preset = 'enter',
+      ["<Tab>"] = {
+        "snippet_forward",
+        function() -- sidekick next edit suggestion
+          return require("sidekick").nes_jump_or_apply()
+        end,
+        function() -- if you are using Neovim's native inline completions
+          return vim.lsp.inline_completion.get()
+        end,
+        "fallback",
+      },
+    },
 
     completion = {
       menu = { auto_show = function(ctx) return ctx.mode ~= 'cmdline' end }
     },
 
     sources = {
-      default = { 'avante', 'lsp', 'path','snippets', 'buffer' },
-      providers = {
-        avante = {
-          module = 'blink-cmp-avante',
-          name = 'Avante',
-          opts = {
-            -- options for blink-cmp-avante
-          }
-        }
-      },
+      default = { 'lsp', 'path','snippets', 'buffer' },
+      providers = {},
     },
 
     -- experimental auto-brackets support
