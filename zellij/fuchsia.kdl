@@ -44,7 +44,7 @@ layout {
 
   // Tab #3: gemini-cli
   tab name="gemini-cli" {
-    pane command="emini-cli"
+    pane command="gemini-cli"
   }
 
   // Tab #4: unwinder editor
