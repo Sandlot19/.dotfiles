@@ -1,5 +1,6 @@
 layout {
-  cwd "upstream/fuchsia"
+  // TODO: Make sure you fill this in!
+  // cwd "$FUCHSIA_DIR"
 
   default_tab_template {
     pane size=1 borderless=true {
@@ -40,7 +41,7 @@ layout {
   }
 
   // Tab #2: zxdb editor
-  nvim name="debugger-edit" cwd="src/developer/debug"
+  nvim name="debugger" cwd="src/developer/debug"
 
   // Tab #3: gemini-cli
   tab name="gemini-cli" {
@@ -48,21 +49,26 @@ layout {
   }
 
   // Tab #4: unwinder editor
-  nvim name="unwinder-edit" cwd="src/lib/unwinder"
+  nvim name="unwinder" cwd="src/lib/unwinder"
 
-  // Tab #5,6,7,8: scratch
+  // Tab #5,6: scratch
   tab
   tab
-  tab
-  tab name="testing" cwd="../../testing"
 
+  // Tab 7: Abacus, viewer for beads tasks in $FUCHSIA_DIR.
+  tab name="abacus" {
+    pane command="abacus"
+  }
+
+  // Tab 8: Simple testing programs typically to inspect DWARF or assembly output.
+  tab name="test-progs" cwd="../../testing"
 
   // Tab #9:
   // Logical container of the entire window.
   // This will create pane layout that will look like
   // >  |>
   // -------
-  // >  |>
+  // >
   //
   // All panes will be rooted at $FUCHSIA_DIR
   tab name="debugger-tests" {
@@ -102,7 +108,6 @@ layout {
 
     pane {
       command "nvim"
-      args "."
     }
 
     pane size=2 borderless=true {
