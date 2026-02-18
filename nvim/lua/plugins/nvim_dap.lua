@@ -11,7 +11,6 @@ return {
       name = 'zxdb',
     }
 
-
     dap.configurations.cpp = {
       {
         name = 'Launch',

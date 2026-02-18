@@ -8,7 +8,7 @@ return {
   },
 
   -- use a release tag to download pre-built binaries
-  version = 'v0.*',
+  version = '1.*',
   -- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
   -- build = 'cargo build --release',
   -- On musl libc based systems you need to add this flag
@@ -23,18 +23,11 @@ return {
 
     -- for keymap, all values may be string | string[]
     -- use an empty table to disable a keymap
-    keymap = {
-      preset = 'enter',
-      ["<Tab>"] = {
-        "snippet_forward",
-        function() -- sidekick next edit suggestion
-          return require("sidekick").nes_jump_or_apply()
-        end,
-        function() -- if you are using Neovim's native inline completions
-          return vim.lsp.inline_completion.get()
-        end,
-        "fallback",
-      },
+    keymap = { preset = 'enter', },
+    appearance = {
+      -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+      -- Adjusts spacing to ensure icons are aligned
+      nerd_font_variant = 'mono'
     },
 
     completion = {
@@ -52,5 +45,7 @@ return {
     -- experimental signature help support
     -- trigger = { signature_help = { enabled = true }, },
     --signature.window.show_documentation = false
-  }
+  },
+
+  opts_extend = { "sources.default" }
 }

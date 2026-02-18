@@ -1,4 +1,5 @@
 local keymap = require('vim.keymap')
+local wk = require('which-key')
 
 local opts = { noremap = true, silent = true }
 
@@ -19,6 +20,14 @@ keymap.set('n', '<leader>b', function() builtin.buffers({layout = {}}) end, opts
 keymap.set('n', '<leader>q', builtin.quickfix, opts)
 -- End Telescope
 
+-- Oil
+opts = { noremap = true, silent = true }
+keymap.set('n', '<leader>O', '<cmd>Oil<CR>', opts)
+keymap.set('n', '<leader>vO', '<cmd>vsplit | Oil<CR>', opts)
+keymap.set('n', '<leader>hO', '<cmd>split | Oil<CR>', opts)
+keymap.set('n', '<leader>fO', '<cmd>Oil --float<CR>', opts)
+-- End Oil
+
 -- Fugitive
 -- These are just straight vim commands, there is no lua api.
 opts = { noremap = true, silent = true }
@@ -26,17 +35,17 @@ keymap.set('n', '<leader>gb', '<cmd>Git blame<CR>', opts)
 --
 
 -- nvim-dap NOT WORKING PRESENTLY
-opts = { noremap = true }
-local dap = require('dap')
-keymap.set('n', '<leader>B', dap.toggle_breakpoint, opts)
-keymap.set('n', '<leader>c', dap.continue, opts)
-keymap.set('n', '<leader>so', dap.step_over, opts)
-keymap.set('n', '<leader>si', dap.step_into, opts)
-local dap_widgets = require('dap.ui.widgets')
-keymap.set('n', '<leader>fr', function()
-  local sidebar = dap_widgets.sidebar(dap_widgets.frames)
-  sidebar.toggle()
-end, opts)
+-- opts = { noremap = true }
+-- local dap = require('dap')
+-- keymap.set('n', '<leader>B', dap.toggle_breakpoint, opts)
+-- keymap.set('n', '<leader>c', dap.continue, opts)
+-- keymap.set('n', '<leader>so', dap.step_over, opts)
+-- keymap.set('n', '<leader>si', dap.step_into, opts)
+-- local dap_widgets = require('dap.ui.widgets')
+-- keymap.set('n', '<leader>fr', function()
+--   local sidebar = dap_widgets.sidebar(dap_widgets.frames)
+--   sidebar.toggle()
+-- end, opts)
 -- End nvim-dap
 
 -- Diagnostics
@@ -120,8 +129,8 @@ local function toggle_telescope(harpoon_files)
     }):find()
 end
 
-vim.keymap.set("n", "<leader>a", function() toggle_telescope(harpoon:list()) end,
-    { desc = "Open harpoon window" })
+-- vim.keymap.set("n", "<leader>a", function() toggle_telescope(harpoon:list()) end,
+--     { desc = "Open harpoon window" })
 
 
 keymap.set('n', '<leader>a', '<cmd>Telescope harpoon marks<CR>', opts)

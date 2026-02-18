@@ -34,4 +34,3 @@ vim.cmd.colorscheme('tokyonight')
 -- works.
 require('config')
 require('keymap')
-require('neorg')
