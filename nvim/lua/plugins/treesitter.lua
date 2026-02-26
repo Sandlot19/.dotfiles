@@ -2,25 +2,10 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    lazy = false,
     config = function()
-      require('nvim-treesitter.configs').setup({
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<leader>v", -- set to `false` to disable one of the mappings
-            node_incremental = "n",
-            scope_incremental = "s",
-            node_decremental = "N",
-          },
-        },
-        indent = {
-          enable = true,
-        }
-      })
+      local ts = require("nvim-treesitter")
+      ts.install({ "fidl", "gn", "json5", "lua", "c", "cpp", "rust", "python" })
     end
   },
   {
