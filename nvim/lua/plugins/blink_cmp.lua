@@ -1,7 +1,7 @@
 return {
   'saghen/blink.cmp',
   lazy = false, -- lazy loading handled internally
-  version = "1.*"
+  branch = "v1",
   -- optional: provides snippets for the snippet source
   dependencies = {
     'nvim-tree/nvim-web-devicons',

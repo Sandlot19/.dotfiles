@@ -16,8 +16,8 @@ vim.api.nvim_set_keymap('', ';', '<Nop>', {})
 vim.g.leader = ';' -- Maybe this one is not needed?
 vim.g.mapleader = ';'
 vim.g.maplocalleader = ';'
-
 opts = {
+    lockfile = vim.fn.stdpath('data') .. '/lazy-lock.json',
     default = {
         lazy = true,
     },
