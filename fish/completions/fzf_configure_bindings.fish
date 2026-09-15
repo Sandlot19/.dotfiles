@@ -1,1 +1,0 @@
-/usr/local/google/home/jruthe/upstream/fzf.fish/src/completions/fzf_configure_bindings.fish

@@ -1,0 +1,20 @@
+[core]
+	editor = nvim
+	excludesFile = ~/.gitignore
+[pull]
+	rebase = true
+[pager]
+	branch = false
+[color]
+	ui = auto
+[diff]
+	tool = nvimdiff
+	conflictstyle = diff3
+[merge]
+	tool = nvimdiff
+	conflictstyle = diff3
+[alias]
+	branch-name = branch --show-current
+	co = checkout
+	pick = cherry-pick
+	stat = -c pager.show=false show --stat

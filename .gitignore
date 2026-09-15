@@ -4,3 +4,5 @@ compile_commands.json
 **/xcshareddata
 .DS_Store
 .cache
+# Fish universal variables file contains machine-local state and should not be tracked.
+fish/fish_variables

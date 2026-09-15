@@ -1,7 +1,0 @@
-[core]
-        editor = nvim
-        excludesFile = ~/.gitignore
-[pull]
-        rebase = true
-[pager]
-	branch = false

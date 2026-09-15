@@ -1,0 +1,20 @@
+[settings]
+experimental = false
+
+[tools]
+"aqua:LuaLS/lua-language-server" = "latest"
+fd = "latest"
+fzf = "latest"
+"github:fish-shell/fish-shell" = "latest"
+"github:gastownhall/beads" = "latest"
+"github:modem-dev/hunk" = "latest"
+"github:tree-sitter/tree-sitter" = "latest"
+herdr = "latest"
+jjui = "latest"
+mermaid-ascii = "latest"
+neovim = "latest"
+node = "latest"
+zellij = "latest"
+uv = "latest"
+usage = "latest"
+"github:Dicklesworthstone/beads_viewer" = "latest"

@@ -1,0 +1,26 @@
+[[actions]]
+name = "yank_change_id_osc52"
+desc = "Copy Change ID via OSC52"
+seq = ["y", "c"]
+scope = "revisions"
+lua = '''
+local short_id = context.change_id()
+if short_id then
+    -- Query jj directly to format the change ID. 
+    -- 8 is the minimum length here; adjust this number to your preference.
+    local long_id, err = jj("log", "--no-graph", "-r", short_id, "-T", "change_id.shortest(8)")
+    
+    if long_id then
+        -- Strip any trailing newlines or whitespace from the jj output
+        long_id = long_id:gsub("%s+", "")
+        
+        -- Route the base-64 encoded string through Zellij via OSC52
+        local cmd = string.format([[printf "\033]52;c;$(printf '%%s' '%s' | base64 | tr -d '\n')\a" > /dev/tty]], long_id)
+        
+        os.execute(cmd)
+        flash("Copied (OSC52): " .. long_id)
+    else
+        flash("Failed to fetch longer ID: " .. tostring(err))
+    end
+end
+'''
